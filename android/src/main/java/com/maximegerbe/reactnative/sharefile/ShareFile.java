@@ -36,7 +36,7 @@ public class ShareFile extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void share(String base64pdf, String filename, String messageTitle, String messageContent Promise promise) {
+  public void share(String base64pdf, String filename, String messageTitle, String messageContent, Promise promise) {
     try {
       cleanSharedFiles();
       File pdfFile = writeFile(base64pdf, filename);
