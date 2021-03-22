@@ -36,11 +36,11 @@ public class ShareFile extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void share(String base64pdf, String filename, Promise promise) {
+  public void share(String base64pdf, String filename, String messageTitle, String messageContent Promise promise) {
     try {
       cleanSharedFiles();
       File pdfFile = writeFile(base64pdf, filename);
-      shareFile(pdfFile);
+      shareFile(pdfFile, messageTitle, messageContent);
 
       promise.resolve(true);
     } catch (IOException e) {
@@ -72,13 +72,17 @@ public class ShareFile extends ReactContextBaseJavaModule {
     return newFilePath;
   }
 
-  private void shareFile(File file) {
+  private void shareFile(File file, String messageTitle, String messageContent) {
     Uri outputFileUri = FileProvider.getUriForFile(reactContext, reactContext.getPackageName() + ".provider", file);
 
     Intent intentShareFile = new Intent(Intent.ACTION_SEND);
     intentShareFile.setType(TYPE_PDF);
     intentShareFile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     intentShareFile.putExtra(Intent.EXTRA_STREAM, outputFileUri);
+    intentShareFile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intentShareFile.putExtra(Intent.EXTRA_SUBJECT, messageTitle);
+    intentShareFile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intentShareFile.putExtra(Intent.EXTRA_TEXT, messageContent);
     intentShareFile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     
     Activity currentActivity = getCurrentActivity();

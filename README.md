@@ -41,7 +41,7 @@ async function loadAndSharePDF() {
 
 ## Methods
 
-* RNShareFile.share(base64Data, documentFileName);
+* RNShareFile.share(base64Data, documentFileName, messageTitle, messageContent);
 
 ### Manual Installation
 
