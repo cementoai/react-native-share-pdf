@@ -40,6 +40,7 @@ public class ShareFile extends ReactContextBaseJavaModule {
     try {
       cleanSharedFiles();
       File pdfFile = writeFile(base64pdf, filename);
+      System.out.println("pdfFile " + pdfFile);
       shareFile(pdfFile, messageTitle, messageContent);
 
       promise.resolve(true);
@@ -74,9 +75,7 @@ public class ShareFile extends ReactContextBaseJavaModule {
 
   private void shareFile(File file, String messageTitle, String messageContent) {
     Uri outputFileUri = FileProvider.getUriForFile(reactContext, reactContext.getPackageName() + ".provider", file);
-    String fileAbsolutePath = file.getAbsolutePath();
     System.out.println("outputFileUri " + outputFileUri);
-    System.out.println("fileAbsolutePath " + fileAbsolutePath);
 
     Intent intentShareFile = new Intent(Intent.ACTION_SEND);
     intentShareFile.setType("application/pdf");
