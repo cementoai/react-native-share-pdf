@@ -40,7 +40,8 @@ public class ShareFile extends ReactContextBaseJavaModule {
     try {
       cleanSharedFiles();
       File pdfFile = writeFile(base64pdf, filename);
-      System.out.println("pdfFile " + pdfFile);
+      System.out.println("pdfFile :");
+      System.out.println(pdfFile);
       shareFile(pdfFile, messageTitle, messageContent);
 
       promise.resolve(true);
