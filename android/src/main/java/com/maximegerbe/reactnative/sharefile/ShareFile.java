@@ -75,6 +75,8 @@ public class ShareFile extends ReactContextBaseJavaModule {
   }
 
   private void shareFile(File file, String messageTitle, String messageContent) {
+    System.out.println("shareFile function");
+    System.out.println("package name " + reactContext.getPackageName());
     Uri outputFileUri = FileProvider.getUriForFile(reactContext, reactContext.getPackageName() + ".fileprovider", file);
     Uri fromFileUri = Uri.fromFile(file);
     System.out.println("fromFileUri " + fromFileUri);
